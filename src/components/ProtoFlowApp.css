@@ -1,0 +1,329 @@
+/* ProtoFlow 样式文件 */
+
+.protoflow-app {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* 手机样机 */
+.phone-frame {
+  width: 375px;
+  height: 667px;
+  background: #000;
+  border-radius: 40px;
+  padding: 12px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 30px;
+  background: #000;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 100;
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  border-radius: 28px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 框架组件 */
+.status-bar {
+  height: 44px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 12px;
+}
+
+.nav-bar {
+  height: 44px;
+  background: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.nav-bar-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  flex: 1;
+  text-align: center;
+}
+
+.nav-bar-btn {
+  border: none;
+  background: none;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
+  padding: 8px;
+}
+
+/* TabBar */
+.tab-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.tab-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.tab-text {
+  font-size: 11px;
+  color: #595959;
+}
+
+.tab-item.active .tab-text {
+  color: #1890ff;
+}
+
+/* 内容组件 */
+.grid {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+  background: #fff;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.grid-item:hover {
+  background-color: #f0f0f0;
+}
+
+.grid-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #1890ff, #40a9ff);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+}
+
+.grid-text {
+  font-size: 13px;
+  color: #000;
+  text-align: center;
+}
+
+/* Card */
+.card {
+  background: #fff;
+  margin-top: 8px;
+  padding: 16px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #595959;
+  margin-bottom: 12px;
+}
+
+/* Carousel */
+.carousel {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #1890ff, #52c41a);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  padding: 20px;
+}
+
+.carousel-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.carousel-subtitle {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* List */
+.list {
+  background: #fff;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  background: #52c41a;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+}
+
+.list-content {
+  flex: 1;
+}
+
+.list-title {
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.list-subtitle {
+  font-size: 13px;
+  color: #595959;
+}
+
+.list-arrow {
+  color: #bfbfbf;
+  font-size: 20px;
+}
+
+/* 信息面板 */
+.info-panel {
+  width: 400px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.info-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1890ff;
+}
+
+.info-subtitle {
+  font-size: 14px;
+  color: #595959;
+  margin-bottom: 24px;
+}
+
+.info-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 20px 0 12px;
+  color: #000;
+}
+
+.info-text {
+  font-size: 14px;
+  color: #595959;
+  line-height: 1.6;
+}
+
+.info-desc {
+  font-size: 14px;
+  color: #8c8c8c;
+  line-height: 1.6;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+}
+
+.info-list li {
+  font-size: 14px;
+  color: #595959;
+  line-height: 1.8;
+  padding-left: 20px;
+  position: relative;
+}
+
+.info-list li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #52c41a;
+  font-weight: bold;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .protoflow-app {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-panel {
+    width: 375px;
+  }
+}
