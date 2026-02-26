@@ -33,25 +33,35 @@ ProtoFlow 是一个基于 JSON Schema 的高保真移动端原型生成系统，
 
 ## 🚀 快速开始
 
-### 安装依赖
+### 在线预览
+
+📱 直接访问：**[https://cyhzzz.github.io/protoflow/](https://cyhzzz.github.io/protoflow/)**
+
+无需任何配置，打开即用！
+
+### 本地开发
+
+#### 安装依赖
 
 ```bash
 npm install
 ```
 
-### 开发模式
+#### 开发模式
 
 ```bash
 npm run dev
 ```
 
-### 构建生产版本
+访问 http://localhost:3000
+
+#### 构建生产版本
 
 ```bash
 npm run build
 ```
 
-### 预览生产版本
+#### 预览生产版本
 
 ```bash
 npm run preview
