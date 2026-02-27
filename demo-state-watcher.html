@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProtoFlow - StateWatcher 状态监听演示</title>
+    <link rel="stylesheet" href="src/design-system.css">
+    <style>
+        .demo-controls {
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .demo-controls button {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .demo-state {
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 12px;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .demo-state h4 {
+            margin-top: 0;
+            color: #1890ff;
+        }
+        .log-container {
+            background: #fffbe6;
+            border: 1px solid #ffe58f;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 12px;
+            font-family: monospace;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            margin: 4px 0;
+            padding: 4px 0;
+            border-bottom: 1px solid #ffe58f;
+        }
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        .log-time {
+            color: #8c8c8c;
+            font-size: 12px;
+        }
+        .toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>🎯 ProtoFlow - StateWatcher 状态监听演示</h1>
+        <p>展示状态变化自动触发actions的功能</p>
+
+        <!-- 演示控制区 -->
+        <div class="demo-controls">
+            <h3>演示控制</h3>
+            <div style="margin-bottom: 12px;">
+                <strong>购物车操作：</strong>
+                <button class="btn btn--primary" onclick="addToCart('iphone')">+ iPhone</button>
+                <button class="btn btn--primary" onclick="addToCart('macbook')">+ MacBook</button>
+                <button class="btn btn--primary" onclick="addToCart('airpods')">+ AirPods</button>
+                <button class="btn btn--secondary" onclick="clearCart()">清空购物车</button>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <strong>VIP状态：</strong>
+                <button class="btn btn--secondary" onclick="toggleVip()">切换VIP</button>
+            </div>
+            <div>
+                <strong>其他操作：</strong>
+                <button class="btn btn--secondary" onclick="resetState()">重置状态</button>
+            </div>
+
+            <div class="demo-state">
+                <h4>当前状态（实时）</h4>
+                <pre id="state-display"></pre>
+            </div>
+
+            <div class="log-container">
+                <h4>Watcher 触发日志</h4>
+                <div id="log-display"></div>
+            </div>
+        </div>
+
+        <!-- 手机样机 -->
+        <div class="main-content">
+            <div class="phone-section">
+                <h2>购物车演示</h2>
+                <div class="phone">
+                    <div class="status-bar">
+                        <div class="status-bar__time" id="status-time">9:41</div>
+                        <div class="status-bar__icons">
+                            <span class="status-bar__icon">5G</span>
+                            <span class="status-bar__icon">🔋</span>
+                        </div>
+                    </div>
+                    <div class="nav-bar">
+                        <div class="nav-bar__title">购物车</div>
+                    </div>
+                    <div class="phone-content" id="phone-content">
+                        <!-- 动态内容 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast 提示 -->
+        <div id="toast" class="toast"></div>
+
+        <!-- 功能说明 -->
+        <div class="info-card">
+            <h3>✨ StateWatcher 功能说明</h3>
+            <h4>1. 自动触发Actions</h4>
+            <ul>
+                <li>状态变化自动触发指定的action</li>
+                <li>支持路径精确匹配和通配符匹配</li>
+                <li>可以监听深路径变化（如 /cart/quantity/iphone）</li>
+            </ul>
+
+            <h4>2. 防抖和节流</h4>
+            <ul>
+                <li><code>debounce</code> - 防抖，延迟执行（适合频繁变化）</li>
+                <li><code>throttle</code> - 节流，限制执行频率</li>
+            </ul>
+
+            <h4>3. 条件执行</h4>
+            <ul>
+                <li><code>condition</code> - 只有满足条件才触发</li>
+                <li>支持 $value 和 $oldValue 特殊变量</li>
+            </ul>
+
+            <h4>4. 特殊选项</h4>
+            <ul>
+                <li><code>immediate</code> - 立即执行一次</li>
+                <li><code>once</code> - 只执行一次</li>
+            </ul>
+
+            <h4>5. 示例场景</h4>
+            <ul>
+                <li>购物车数量变化 → 显示Toast提示</li>
+                <li>VIP状态变化 → 显示开通/过期提示</li>
+                <li>表单输入 → 实时验证</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="src/core/ExpressionEvaluator.js"></script>
+    <script src="src/core/VisibilityChecker.js"></script>
+    <script src="src/core/StateWatcher.js"></script>
+    <script src="src/protoflow-state-watcher.js"></script>
+    <script>
+        // 状态管理
+        let appState = {
+            cart: {
+                quantity: {
+                    iphone: 0,
+                    macbook: 0,
+                    airpods: 0
+                },
+                total: 0
+            },
+            user: {
+                vip: false
+            },
+            form: {
+                phone: ''
+            }
+        };
+
+        // 日志系统
+        const logEntries = [];
+
+        function addLog(message) {
+            const now = new Date();
+            const time = now.toLocaleTimeString('zh-CN');
+            const entry = `<div class="log-entry"><span class="log-time">[${time}]</span> ${message}</div>`;
+            logEntries.push(entry);
+            if (logEntries.length > 50) {
+                logEntries.shift();
+            }
+            document.getElementById('log-display').innerHTML = logEntries.join('');
+            document.getElementById('log-display').scrollTop = document.getElementById('log-display').scrollHeight;
+        }
+
+        // Toast 提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 更新状态显示
+        function updateStateDisplay() {
+            const display = document.getElementById('state-display');
+            display.textContent = JSON.stringify(appState, null, 2);
+        }
+
+        // 添加到购物车
+        function addToCart(item) {
+            appState.cart.quantity[item]++;
+            appState.cart.total++;
+            updateStateDisplay();
+
+            // 添加日志
+            addLog(`📦 添加 ${item}，当前总数：${appState.cart.total}`);
+
+            // 模拟状态变化通知（实际由 StateWatcher 处理）
+            if (window.stateWatcher) {
+                window.stateWatcher.notify('/cart', appState.cart);
+            }
+        }
+
+        // 清空购物车
+        function clearCart() {
+            appState.cart.quantity = {
+                iphone: 0,
+                macbook: 0,
+                airpods: 0
+            };
+            appState.cart.total = 0;
+            updateStateDisplay();
+            addLog(`🗑️ 清空购物车`);
+
+            if (window.stateWatcher) {
+                window.stateWatcher.notify('/cart', appState.cart);
+            }
+        }
+
+        // 切换VIP
+        function toggleVip() {
+            const oldVip = appState.user.vip;
+            appState.user.vip = !appState.user.vip;
+            updateStateDisplay();
+
+            const message = appState.user.vip ? '🎉 开通VIP' : '😢 VIP过期';
+            addLog(`💎 VIP状态: ${appState.user.vip ? 'VIP会员' : '普通会员'}`);
+            showToast(message);
+
+            if (window.stateWatcher) {
+                window.stateWatcher.notify('/user/vip', appState.user.vip, oldVip);
+            }
+        }
+
+        // 重置状态
+        function resetState() {
+            appState = {
+                cart: {
+                    quantity: {
+                        iphone: 0,
+                        macbook: 0,
+                        airpods: 0
+                    },
+                    total: 0
+                },
+                user: {
+                    vip: false
+                },
+                form: {
+                    phone: ''
+                }
+            };
+            updateStateDisplay();
+            addLog(`🔄 状态已重置`);
+        }
+
+        // 更新时间
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const time = `${hours}:${minutes}`;
+            document.getElementById('status-time').textContent = time;
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStateDisplay();
+            updateTime();
+            setInterval(updateTime, 60000);
+
+            addLog('🚀 StateWatcher 演示已启动');
+        });
+    </script>
+</body>
+</html>

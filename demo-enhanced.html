@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProtoFlow - 动态属性和条件可见性演示</title>
+    <link rel="stylesheet" href="src/design-system.css">
+    <style>
+        .demo-controls {
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .demo-controls button {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .demo-state {
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 12px;
+            font-family: monospace;
+        }
+        .demo-state h4 {
+            margin-top: 0;
+            color: #1890ff;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>🎯 ProtoFlow - 动态属性和条件可见性演示</h1>
+        <p>展示 ExpressionEvaluator 和 VisibilityChecker 的功能</p>
+
+        <!-- 演示控制区 -->
+        <div class="demo-controls">
+            <h3>演示控制</h3>
+            <button class="btn btn--primary" onclick="toggleLogin()">切换登录状态</button>
+            <button class="btn btn--secondary" onclick="togglePremium()">切换VIP状态</button>
+            <button class="btn btn--secondary" onclick="updateBalance()">更新余额</button>
+            <button class="btn btn--secondary" onclick="resetState()">重置状态</button>
+
+            <div class="demo-state">
+                <h4>当前状态（实时）</h4>
+                <pre id="state-display"></pre>
+            </div>
+        </div>
+
+        <!-- 两个样机并排展示 -->
+        <div class="main-content">
+            <!-- 原版 -->
+            <div class="phone-section">
+                <h2>原版配置</h2>
+                <div class="phone">
+                    <div class="status-bar">
+                        <div class="status-bar__time" id="status-time-1">9:41</div>
+                        <div class="status-bar__icons">
+                            <span class="status-bar__icon">5G</span>
+                            <span class="status-bar__icon">🔋</span>
+                        </div>
+                    </div>
+                    <div class="nav-bar">
+                        <div class="nav-bar__title">智能客服</div>
+                    </div>
+                    <div class="phone-content" id="phone-content-1">
+                        <!-- 原版内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 增强版 -->
+            <div class="phone-section">
+                <h2>增强版配置</h2>
+                <div class="phone">
+                    <div class="status-bar">
+                        <div class="status-bar__time" id="status-time-2">9:41</div>
+                        <div class="status-bar__icons">
+                            <span class="status-bar__icon">5G</span>
+                            <span class="status-bar__icon">🔋</span>
+                        </div>
+                    </div>
+                    <div class="nav-bar">
+                        <div class="nav-bar__title">智能客服</div>
+                    </div>
+                    <div class="phone-content" id="phone-content-2">
+                        <!-- 增强版内容 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能说明 -->
+        <div class="info-card">
+            <h3>✨ 新功能说明</h3>
+            <h4>1. 动态属性（ExpressionEvaluator）</h4>
+            <ul>
+                <li><code>$state</code> - 读取状态值</li>
+                <li><code>$cond</code> - 条件表达式</li>
+                <li><code>$template</code> - 模板字符串</li>
+                <li><code>$computed</code> - 调用计算函数</li>
+            </ul>
+
+            <h4>2. 条件可见性（VisibilityChecker）</h4>
+            <ul>
+                <li><code>visible</code> - 显示条件</li>
+                <li><code>hidden</code> - 隐藏条件</li>
+                <li>支持 AND/OR 逻辑组合</li>
+            </ul>
+
+            <h4>3. 内置计算函数</h4>
+            <ul>
+                <li><code>formatCurrency</code> - 格式化货币</li>
+                <li><code>formatDate</code> - 格式化日期</li>
+                <li><code>formatNumber</code> - 格式化数字</li>
+                <li><code>formatPercent</code> - 格式化百分比</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="src/core/ExpressionEvaluator.js"></script>
+    <script src="src/core/VisibilityChecker.js"></script>
+    <script src="src/protoflow-enhanced.js"></script>
+    <script>
+        // 状态管理
+        let appState = {
+            user: {
+                name: '张三',
+                loggedIn: false,
+                premium: false
+            },
+            account: {
+                balance: 123456.78
+            }
+        };
+
+        // 更新状态显示
+        function updateStateDisplay() {
+            const display = document.getElementById('state-display');
+            display.textContent = JSON.stringify(appState, null, 2);
+        }
+
+        // 切换登录状态
+        function toggleLogin() {
+            appState.user.loggedIn = !appState.user.loggedIn;
+            updateStateDisplay();
+            alert(`登录状态：${appState.user.loggedIn ? '已登录' : '未登录'}`);
+        }
+
+        // 切换VIP状态
+        function togglePremium() {
+            appState.user.premium = !appState.user.premium;
+            updateStateDisplay();
+            alert(`VIP状态：${appState.user.premium ? '是VIP' : '普通用户'}`);
+        }
+
+        // 更新余额
+        function updateBalance() {
+            const newBalance = parseFloat(prompt('输入新余额：', appState.account.balance));
+            if (!isNaN(newBalance)) {
+                appState.account.balance = newBalance;
+                updateStateDisplay();
+            }
+        }
+
+        // 重置状态
+        function resetState() {
+            appState = {
+                user: {
+                    name: '张三',
+                    loggedIn: false,
+                    premium: false
+                },
+                account: {
+                    balance: 123456.78
+                }
+            };
+            updateStateDisplay();
+            alert('状态已重置');
+        }
+
+        // 更新时间
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const time = `${hours}:${minutes}`;
+
+            document.getElementById('status-time-1').textContent = time;
+            document.getElementById('status-time-2').textContent = time;
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStateDisplay();
+            updateTime();
+            setInterval(updateTime, 60000);
+        });
+    </script>
+</body>
+</html>

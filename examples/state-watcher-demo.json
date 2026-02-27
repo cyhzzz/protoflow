@@ -1,0 +1,276 @@
+{
+  "version": "2.2.0",
+  "app": {
+    "id": "state-watcher-demo",
+    "name": "状态监听演示",
+    "version": "2.2.0",
+    "description": "演示 StateWatcher 状态监听功能",
+    "pages": [
+      {
+        "id": "home",
+        "name": "首页",
+        "description": "购物车示例",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "购物车",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "title": "商品列表",
+              "elevation": 2,
+              "borderRadius": 12,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 16,
+                "bottom": 16,
+                "left": 16,
+                "right": 16
+              },
+              "children": [
+                {
+                  "type": "list",
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "text": "iPhone 15 Pro",
+                      "subtext": { "$template": "¥7,999 x ${/cart/quantity/iphone}" },
+                      "onClickAction": {
+                        "type": "addToCart",
+                        "item": "iphone"
+                      }
+                    },
+                    {
+                      "type": "listItem",
+                      "text": "MacBook Pro",
+                      "subtext": { "$template": "¥14,999 x ${/cart/quantity/macbook}" },
+                      "onClickAction": {
+                        "type": "addToCart",
+                        "item": "macbook"
+                      }
+                    },
+                    {
+                      "type": "listItem",
+                      "text": "AirPods Pro",
+                      "subtext": { "$template": "¥1,999 x ${/cart/quantity/airpods}" },
+                      "onClickAction": {
+                        "type": "addToCart",
+                        "item": "airpods"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "text",
+                  "content": "购物车数量",
+                  "style": {
+                    "fontSize": 16,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": { "$template": "共 ${/cart/total} 件商品" },
+                  "style": {
+                    "fontSize": 14,
+                    "color": "#595959"
+                  },
+                  "watch": {
+                    "/cart/total": {
+                      "action": {
+                        "type": "showToast",
+                        "toast": {
+                          "message": { "$template": "购物车已更新：${/cart/total} 件" }
+                        }
+                      },
+                      "debounce": 1000
+                    }
+                  }
+                },
+                {
+                  "type": "button",
+                  "text": "清空购物车",
+                  "buttonType": "danger",
+                  "size": "medium",
+                  "onClickAction": {
+                    "type": "clearCart"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "card",
+              "title": "VIP状态",
+              "elevation": 2,
+              "borderRadius": 12,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 16,
+                "bottom": 16,
+                "left": 16,
+                "right": 16
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": {
+                    "$cond": {
+                      "$state": "/user/vip",
+                      "eq": true
+                    },
+                    "$then": "您是VIP会员",
+                    "$else": "普通会员"
+                  },
+                  "style": {
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "color": {
+                      "$cond": {
+                        "$state": "/user/vip",
+                        "eq": true
+                      },
+                      "$then": "#FFD700",
+                      "$else": "#8E8E93"
+                    }
+                  },
+                  "watch": {
+                    "/user/vip": {
+                      "action": {
+                        "type": "showToast",
+                        "toast": {
+                          "message": {
+                            "$cond": {
+                              "$state": "/user/vip",
+                              "eq": true
+                            },
+                            "$then": "🎉 恭喜开通VIP！",
+                            "$else": "😢 VIP已过期"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "button",
+                  "text": "切换VIP",
+                  "buttonType": "primary",
+                  "size": "medium",
+                  "onClickAction": {
+                    "type": "toggleVip"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "card",
+              "title": "表单验证",
+              "elevation": 2,
+              "borderRadius": 12,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 16,
+                "bottom": 16,
+                "left": 16,
+                "right": 16
+              },
+              "children": [
+                {
+                  "type": "input",
+                  "inputType": "text",
+                  "placeholder": "请输入手机号",
+                  "value": { "$bindState": "/form/phone" },
+                  "maxLength": 11
+                },
+                {
+                  "type": "text",
+                  "content": {
+                    "$cond": {
+                      "$state": "/form/phone",
+                      "exists": true
+                    },
+                    "$then": {
+                      "$cond": {
+                        "$state": "/form/phone",
+                        "eq": "13800138000"
+                      },
+                      "$then": "✅ 手机号正确",
+                      "$else": "❌ 手机号不正确"
+                    },
+                    "$else": "请输入手机号"
+                  },
+                  "style": {
+                    "fontSize": 14,
+                    "color": {
+                      "$cond": {
+                        "$state": "/form/phone",
+                        "eq": "13800138000"
+                      },
+                      "$then": "#52C41A",
+                      "$else": "#FF4D4F"
+                    }
+                  },
+                  "watch": {
+                    "/form/phone": {
+                      "action": {
+                        "type": "validatePhone"
+                      },
+                      "throttle": 500
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "router": {
+      "mode": "stack",
+      "initialPageId": "home",
+      "historyLimit": 10,
+      "transition": {
+        "type": "push",
+        "duration": 300
+      }
+    },
+    "theme": {
+      "primaryColor": "#1890FF",
+      "secondaryColor": "#52C41A",
+      "errorColor": "#FF4D4F",
+      "warningColor": "#FAAD14",
+      "textColor": "#000000",
+      "backgroundColor": "#FFFFFF"
+    },
+    "state": {
+      "cart": {
+        "quantity": {
+          "iphone": 0,
+          "macbook": 0,
+          "airpods": 0
+        },
+        "total": 0
+      },
+      "user": {
+        "vip": false
+      },
+      "form": {
+        "phone": ""
+      }
+    }
+  }
+}

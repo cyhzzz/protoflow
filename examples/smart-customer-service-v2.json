@@ -1,0 +1,1733 @@
+{
+  "version": "2.0.0",
+  "app": {
+    "id": "smart-customer-service",
+    "name": "智能客服",
+    "version": "2.0.0",
+    "description": "银行智能客服系统 - 严格参照参考项目交互逻辑",
+    "pages": [
+      {
+        "id": "home",
+        "name": "首页",
+        "description": "智能客服首页 - 展示功能宫格和快捷入口",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "statusBar",
+              "style": "dark",
+              "showTime": true,
+              "showBattery": true,
+              "showSignal": true,
+              "networkType": "wifi",
+              "height": 44,
+              "backgroundColor": "#000000",
+              "textColor": "#FFFFFF"
+            },
+            {
+              "type": "navBar",
+              "title": "智能客服",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "banner",
+              "aspectRatio": 1.7777777778,
+              "items": [
+                {
+                  "type": "image",
+                  "src": "/images/banner1.jpg",
+                  "title": "新功能上线",
+                  "subtitle": "智能客服全面升级",
+                  "onClickAction": {
+                    "type": "navigateTo",
+                    "pageId": "announcement"
+                  }
+                }
+              ],
+              "autoPlay": false,
+              "showIndicator": false
+            },
+            {
+              "type": "section",
+              "title": "快捷服务",
+              "spacing": 16,
+              "padding": {
+                "top": 24,
+                "bottom": 24,
+                "left": 16,
+                "right": 16
+              },
+              "children": [
+                {
+                  "type": "grid",
+                  "colCount": 4,
+                  "spacing": 16,
+                  "items": [
+                    {
+                      "type": "gridItem",
+                      "icon": "🏦",
+                      "text": "开户行查询",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "query-branch"
+                      }
+                    },
+                    {
+                      "type": "gridItem",
+                      "icon": "💸",
+                      "text": "转账进度",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "answer-transfer-progress"
+                      }
+                    },
+                    {
+                      "type": "gridItem",
+                      "icon": "💳",
+                      "text": "账户管理费",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "account-fee"
+                      }
+                    },
+                    {
+                      "type": "gridItem",
+                      "icon": "🛠️",
+                      "text": "更多工具",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "tools-expand"
+                      }
+                    },
+                    {
+                      "type": "gridItem",
+                      "icon": "💰",
+                      "text": "贷款查询",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "loan-query"
+                      }
+                    },
+                    {
+                      "type": "gridItem",
+                      "icon": "📈",
+                      "text": "理财查询",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "investment-query"
+                      }
+                    },
+                    {
+                      "type": "gridItem",
+                      "icon": "💳",
+                      "text": "卡片服务",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "card-service"
+                      }
+                    },
+                    {
+                      "type": "gridItem",
+                      "icon": "🔒",
+                      "text": "安全中心",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "security-center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "card",
+              "title": "我关心的",
+              "elevation": 2,
+              "borderRadius": 12,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 16,
+                "bottom": 16,
+                "left": 16,
+                "right": 16
+              },
+              "children": [
+                {
+                  "type": "section",
+                  "title": "我的转账",
+                  "spacing": 8,
+                  "children": [
+                    {
+                      "type": "list",
+                      "items": [
+                        {
+                          "type": "listItem",
+                          "icon": "⏱️",
+                          "text": "转账汇款到账时间？",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "answer-transfer-time"
+                          }
+                        },
+                        {
+                          "type": "listItem",
+                          "icon": "💰",
+                          "text": "手机银行转账汇款手续费全免吗？",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "answer-transfer-fee"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "title": "我的贷款",
+                  "spacing": 8,
+                  "children": [
+                    {
+                      "type": "list",
+                      "items": [
+                        {
+                          "type": "listItem",
+                          "icon": "⚡",
+                          "text": "\"闪电贷\"电核放款说明",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "answer-loan-verify"
+                          }
+                        },
+                        {
+                          "type": "listItem",
+                          "icon": "🆕",
+                          "text": "\"闪电贷\"新系统平台上线",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "answer-loan-new-system"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "title": "我的交易",
+                  "spacing": 8,
+                  "children": [
+                    {
+                      "type": "list",
+                      "items": [
+                        {
+                          "type": "listItem",
+                          "icon": "📋",
+                          "text": "如何查询13个月前的交易明细？",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "transaction-query"
+                          }
+                        },
+                        {
+                          "type": "listItem",
+                          "icon": "❓",
+                          "text": "对最近的交易有疑问？",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "transaction-dispute"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "title": "我的基金",
+                  "spacing": 8,
+                  "children": [
+                    {
+                      "type": "list",
+                      "items": [
+                        {
+                          "type": "listItem",
+                          "icon": "📄",
+                          "text": "什么时候可以打印申购确认书？",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "answer-fund-print"
+                          }
+                        },
+                        {
+                          "type": "listItem",
+                          "icon": "⏰",
+                          "text": "赎回资金的到账时间在哪里查询？",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "answer-fund-redeem"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "title": "我的理财",
+                  "spacing": 8,
+                  "children": [
+                    {
+                      "type": "list",
+                      "items": [
+                        {
+                          "type": "listItem",
+                          "icon": "🔑",
+                          "text": "哪些账户可以申请快易理财？",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "answer-investment-account"
+                          }
+                        },
+                        {
+                          "type": "listItem",
+                          "icon": "💱",
+                          "text": "快易理财转账如何办理？",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "answer-investment-transfer"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "announcement",
+        "name": "公告",
+        "description": "公告详情页",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "公告",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "新功能上线公告",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "智能客服系统已全面升级，新增快捷服务、个性化推荐等功能，提升用户体验。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "query-branch",
+        "name": "开户行查询",
+        "description": "查询开户行信息",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "开户行查询",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "input",
+              "inputType": "text",
+              "placeholder": "请输入卡号或账号",
+              "maxLength": 19,
+              "style": {
+                "fontSize": 16,
+                "color": "#000000",
+                "backgroundColor": "#FFFFFF",
+                "borderRadius": 8,
+                "borderWidth": 1,
+                "borderColor": "#E5E5E5",
+                "padding": {
+                  "top": 12,
+                  "bottom": 12,
+                  "left": 16,
+                  "right": 16
+                }
+              }
+            },
+            {
+              "type": "button",
+              "text": "查询",
+              "buttonType": "primary",
+              "size": "large",
+              "onClickAction": {
+                "type": "showToast",
+                "toast": {
+                  "message": "查询成功",
+                  "duration": 2000,
+                  "position": "center",
+                  "icon": "success"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "answer-transfer-progress",
+        "name": "转账进度",
+        "description": "转账进度查询结果",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "转账进度",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "转账进度查询",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "您的转账申请已提交，请等待系统处理。预计1-3个工作日到账。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "account-fee",
+        "name": "账户管理费",
+        "description": "账户管理费说明",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "账户管理费",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "账户管理费说明",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "账户管理费按月收取，具体金额请咨询客服。建议保持账户活跃度可减免部分费用。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "tools-expand",
+        "name": "更多工具",
+        "description": "工具展开页",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "更多工具",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "list",
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "icon": "🏦",
+                      "text": "开户行查询",
+                      "accessory": "arrow",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "query-branch"
+                      }
+                    },
+                    {
+                      "type": "listItem",
+                      "icon": "💳",
+                      "text": "账户管理费",
+                      "accessory": "arrow",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "account-fee"
+                      }
+                    },
+                    {
+                      "type": "listItem",
+                      "icon": "💸",
+                      "text": "转账进度",
+                      "accessory": "arrow",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "answer-transfer-progress"
+                      }
+                    },
+                    {
+                      "type": "listItem",
+                      "icon": "🏢",
+                      "text": "网点查询",
+                      "accessory": "arrow",
+                      "onClickAction": {
+                        "type": "showToast",
+                        "toast": {
+                          "message": "网点查询功能开发中",
+                          "icon": "info"
+                        }
+                      }
+                    },
+                    {
+                      "type": "listItem",
+                      "icon": "📝",
+                      "text": "自助申请",
+                      "accessory": "arrow",
+                      "onClickAction": {
+                        "type": "showToast",
+                        "toast": {
+                          "message": "自助申请功能开发中",
+                          "icon": "info"
+                        }
+                      }
+                    },
+                    {
+                      "type": "listItem",
+                      "icon": "🔔",
+                      "text": "动账通知",
+                      "accessory": "arrow",
+                      "onClickAction": {
+                        "type": "showToast",
+                        "toast": {
+                          "message": "动账通知功能开发中",
+                          "icon": "info"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "transaction-query",
+        "name": "交易查询",
+        "description": "交易明细查询",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "交易查询",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "picker",
+                  "pickerType": "date",
+                  "placeholder": "选择查询日期",
+                  "format": "YYYY-MM-DD",
+                  "minDate": "2020-01-01",
+                  "maxDate": "2026-12-31"
+                },
+                {
+                  "type": "button",
+                  "text": "查询",
+                  "buttonType": "primary",
+                  "size": "large",
+                  "onClickAction": {
+                    "type": "showToast",
+                    "toast": {
+                      "message": "查询成功",
+                      "duration": 2000,
+                      "position": "center",
+                      "icon": "success"
+                    }
+                  }
+                },
+                {
+                  "type": "section",
+                  "title": "帮助",
+                  "spacing": 8,
+                  "children": [
+                    {
+                      "type": "list",
+                      "items": [
+                        {
+                          "type": "listItem",
+                          "text": "对最近的交易有疑问？",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "navigateTo",
+                            "pageId": "transaction-dispute"
+                          }
+                        },
+                        {
+                          "type": "listItem",
+                          "text": "如何查询13个月前的交易明细？",
+                          "accessory": "arrow",
+                          "onClickAction": {
+                            "type": "showToast",
+                            "toast": {
+                              "message": "可前往网点柜台办理",
+                              "icon": "info"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "transaction-dispute",
+        "name": "交易存疑",
+        "description": "交易疑问解答",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "交易存疑",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "交易存疑处理",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "如果对交易有疑问，请联系客服热线或前往网点柜台办理。我们将尽快为您核实处理。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "answer-transfer-time",
+        "name": "转账到账时间",
+        "description": "转账到账时间说明",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "转账到账时间",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "转账到账时间说明",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "1. 同行转账：实时到账\n2. 跨行转账：一般1-3个工作日\n3. 异地转账：一般2-4个工作日\n\n如有疑问，请联系客服。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "answer-transfer-fee",
+        "name": "转账手续费",
+        "description": "转账手续费说明",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "转账手续费",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "转账手续费说明",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "手机银行转账汇款手续费全免！\n\n通过手机银行办理转账汇款业务，无需支付手续费。支持7×24小时全天候服务。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "answer-loan-verify",
+        "name": "闪电贷电核说明",
+        "description": "闪电贷电核放款说明",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "闪电贷电核说明",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "\"闪电贷\"电核放款说明",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "闪电贷申请后需要经过电核审核，审核通过后即可放款。电核会在工作时间内进行，请保持电话畅通。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "answer-loan-new-system",
+        "name": "闪电贷新系统",
+        "description": "闪电贷新系统平台上线说明",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "闪电贷新系统",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "\"闪电贷\"新系统平台上线",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "闪电贷新系统平台已正式上线，提供更快的审批速度、更便捷的申请流程。欢迎体验！",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "answer-fund-print",
+        "name": "基金申购确认书",
+        "description": "基金申购确认书打印说明",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "基金申购确认书",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "基金申购确认书打印",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "申购确认书可在交易确认日后的T+1日开始打印。您可以通过手机银行或前往网点柜台办理。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "answer-fund-redeem",
+        "name": "基金赎回到账时间",
+        "description": "基金赎回资金到账时间查询",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "基金赎回到账时间",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "基金赎回到账时间",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "基金赎回资金的到账时间可在\"我的基金\"页面查看。一般情况下，T+1日到账。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "answer-investment-account",
+        "name": "快易理财账户",
+        "description": "快易理财申请账户说明",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "快易理财账户",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "快易理财申请账户",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "持有本行借记卡且开通手机银行的客户均可申请快易理财。首次购买前需进行风险测评。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "answer-investment-transfer",
+        "name": "快易理财转账",
+        "description": "快易理财转账办理说明",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "快易理财转账",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "快易理财转账办理",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "快易理财转账可通过手机银行办理。在\"投资理财\"页面选择快易理财产品，点击购买即可。",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959",
+                    "lineHeight": 24
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "loan-query",
+        "name": "贷款查询",
+        "description": "贷款信息查询",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "贷款查询",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "贷款查询功能开发中",
+                  "style": {
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "敬请期待",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "investment-query",
+        "name": "理财查询",
+        "description": "理财产品查询",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "理财查询",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "理财查询功能开发中",
+                  "style": {
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "敬请期待",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "card-service",
+        "name": "卡片服务",
+        "description": "银行卡服务",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "卡片服务",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "卡片服务功能开发中",
+                  "style": {
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "敬请期待",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "security-center",
+        "name": "安全中心",
+        "description": "账户安全设置",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "安全中心",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "安全中心功能开发中",
+                  "style": {
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "敬请期待",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "profile",
+        "name": "我的",
+        "description": "个人中心",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "我的",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "个人中心功能开发中",
+                  "style": {
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": "敬请期待",
+                  "style": {
+                    "fontSize": 15,
+                    "fontWeight": "normal",
+                    "color": "#595959"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "tabBar": {
+      "type": "tabBar",
+      "selectedIndex": 0,
+      "backgroundColor": "#FFFFFF",
+      "height": 56,
+      "showDivider": true,
+      "items": [
+        {
+          "title": "首页",
+          "icon": "🏠",
+          "selectedIcon": "🏠",
+          "pageId": "home"
+        },
+        {
+          "title": "交易",
+          "icon": "💳",
+          "selectedIcon": "💳",
+          "pageId": "transaction-query"
+        },
+        {
+          "title": "我的",
+          "icon": "👤",
+          "selectedIcon": "👤",
+          "pageId": "profile"
+        }
+      ]
+    },
+    "router": {
+      "mode": "stack",
+      "initialPageId": "home",
+      "historyLimit": 10,
+      "transition": {
+        "type": "push",
+        "duration": 300
+      }
+    },
+    "theme": {
+      "primaryColor": "#1890FF",
+      "secondaryColor": "#52C41A",
+      "errorColor": "#FF4D4F",
+      "warningColor": "#FAAD14",
+      "textColor": "#000000",
+      "backgroundColor": "#FFFFFF"
+    }
+  }
+}

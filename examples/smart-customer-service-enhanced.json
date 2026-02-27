@@ -1,0 +1,304 @@
+{
+  "version": "2.1.0",
+  "app": {
+    "id": "smart-customer-service-demo",
+    "name": "智能客服（增强版）",
+    "version": "2.1.0",
+    "description": "演示 ExpressionEvaluator 和 VisibilityChecker 功能",
+    "pages": [
+      {
+        "id": "home",
+        "name": "首页",
+        "description": "演示动态属性和条件可见性",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "智能客服",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "banner",
+              "aspectRatio": 1.7777777778,
+              "items": [
+                {
+                  "type": "image",
+                  "src": "/images/banner1.jpg",
+                  "title": {
+                    "$template": "欢迎回来，${/user/name}！"
+                  },
+                  "subtitle": {
+                    "$cond": {
+                      "$state": "/user/premium",
+                      "eq": true
+                    },
+                    "$then": "VIP尊享服务已开通",
+                    "$else": "开通VIP享受更多权益"
+                  },
+                  "onClickAction": {
+                    "type": "navigateTo",
+                    "pageId": "vip-intro"
+                  }
+                }
+              ],
+              "autoPlay": false,
+              "showIndicator": false
+            },
+            {
+              "type": "section",
+              "title": "快捷服务",
+              "spacing": 16,
+              "children": [
+                {
+                  "type": "grid",
+                  "colCount": 4,
+                  "spacing": 16,
+                  "items": [
+                    {
+                      "type": "gridItem",
+                      "icon": "🏦",
+                      "text": "开户行查询",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "query-branch"
+                      }
+                    },
+                    {
+                      "type": "gridItem",
+                      "icon": "💸",
+                      "text": "转账进度",
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "answer-transfer-progress"
+                      }
+                    },
+                    {
+                      "type": "gridItem",
+                      "icon": "💰",
+                      "text": "贷款查询",
+                      "visible": [
+                        {
+                          "$state": "/user/loggedIn",
+                          "eq": true
+                        }
+                      ],
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "loan-query"
+                      }
+                    },
+                    {
+                      "type": "gridItem",
+                      "icon": "📈",
+                      "text": "理财查询",
+                      "visible": [
+                        {
+                          "$state": "/user/premium",
+                          "eq": true
+                        }
+                      ],
+                      "onClickAction": {
+                        "type": "navigateTo",
+                        "pageId": "investment-query"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "card",
+              "title": "我的账户",
+              "elevation": 2,
+              "borderRadius": 12,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 16,
+                "bottom": 16,
+                "left": 16,
+                "right": 16
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": {
+                    "$template": "账户余额：${/account/balance}"
+                  },
+                  "style": {
+                    "fontSize": 24,
+                    "fontWeight": "bold",
+                    "color": "#1890FF"
+                  }
+                },
+                {
+                  "type": "text",
+                  "content": {
+                    "$computed": "formatCurrency",
+                    "args": {
+                      "value": {
+                        "$state": "/account/balance"
+                      }
+                    }
+                  },
+                  "style": {
+                    "fontSize": 18,
+                    "fontWeight": "normal",
+                    "color": "#595959"
+                  }
+                },
+                {
+                  "type": "button",
+                  "text": {
+                    "$cond": {
+                      "$state": "/user/loggedIn",
+                      "eq": true
+                    },
+                    "$then": "查看明细",
+                    "$else": "立即登录"
+                  },
+                  "buttonType": "primary",
+                  "size": "large",
+                  "onClickAction": {
+                    "type": "navigateTo",
+                    "pageId": "account-detail"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "vip-intro",
+        "name": "VIP介绍",
+        "description": "VIP服务介绍",
+        "componentTree": {
+          "type": "safeArea",
+          "children": [
+            {
+              "type": "navBar",
+              "title": "VIP尊享服务",
+              "titleStyle": {
+                "fontSize": 18,
+                "fontWeight": "semibold",
+                "color": "#000000"
+              },
+              "leftItems": [
+                {
+                  "type": "back",
+                  "tintColor": "#000000",
+                  "onClickAction": {
+                    "type": "back"
+                  }
+                }
+              ],
+              "backgroundColor": "#FFFFFF",
+              "borderless": false,
+              "height": 44
+            },
+            {
+              "type": "card",
+              "elevation": 1,
+              "borderRadius": 8,
+              "backgroundColor": "#FFFFFF",
+              "padding": {
+                "top": 20,
+                "bottom": 20,
+                "left": 20,
+                "right": 20
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "content": "VIP专属特权",
+                  "style": {
+                    "fontSize": 20,
+                    "fontWeight": "bold",
+                    "color": "#000000"
+                  }
+                },
+                {
+                  "type": "list",
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "text": "专属客服通道"
+                    },
+                    {
+                      "type": "listItem",
+                      "text": "免手续费转账"
+                    },
+                    {
+                      "type": "listItem",
+                      "text": "优先处理额度申请"
+                    },
+                    {
+                      "type": "listItem",
+                      "text": "专属理财产品"
+                    }
+                  ]
+                },
+                {
+                  "type": "button",
+                  "text": {
+                    "$cond": {
+                      "$state": "/user/premium",
+                      "eq": true
+                    },
+                    "$then": "已是VIP用户",
+                    "$else": "立即开通"
+                  },
+                  "buttonType": "primary",
+                  "size": "large",
+                  "disabled": {
+                    "$state": "/user/premium",
+                    "eq": true
+                  },
+                  "onClickAction": {
+                    "type": "navigateTo",
+                    "pageId": "vip-open"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "router": {
+      "mode": "stack",
+      "initialPageId": "home",
+      "historyLimit": 10,
+      "transition": {
+        "type": "push",
+        "duration": 300
+      }
+    },
+    "theme": {
+      "primaryColor": "#1890FF",
+      "secondaryColor": "#52C41A",
+      "errorColor": "#FF4D4F",
+      "warningColor": "#FAAD14",
+      "textColor": "#000000",
+      "backgroundColor": "#FFFFFF"
+    },
+    "state": {
+      "user": {
+        "name": "张三",
+        "loggedIn": true,
+        "premium": false
+      },
+      "account": {
+        "balance": 123456.78
+      }
+    }
+  }
+}
