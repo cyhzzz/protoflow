@@ -398,6 +398,162 @@ class ProtoFlowApp {
     bindPhoneEvents() {
         // 动态绑定的内容在渲染时已经通过onclick绑定
     }
+
+    // ========== 缺失的页面渲染方法 ==========
+
+    // 开户行查询页面
+    renderQueryBranch() {
+        return `
+            <div class="card">
+                <div class="section-title">开户行查询</div>
+                <div style="padding: 16px;">
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; margin-bottom: 8px; color: #666;">请输入银行卡号</label>
+                        <input type="text" placeholder="请输入16-19位银行卡号" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <button onclick="app.showToast('查询成功')" style="width: 100%; padding: 12px; background: #007AFF; color: white; border: none; border-radius: 8px; font-size: 16px;">查询</button>
+                </div>
+            </div>
+        `;
+    }
+
+    // 转账进度页面
+    renderTransferProgress() {
+        return `
+            <div class="card">
+                <div class="section-title">转账进度查询</div>
+                <div class="list">
+                    ${this.renderListItem('📤', '转账中 - ¥1,000.00', 'transfer-detail')}
+                    ${this.renderListItem('✅', '已完成 - ¥500.00', 'transfer-detail')}
+                    ${this.renderListItem('✅', '已完成 - ¥2,000.00', 'transfer-detail')}
+                </div>
+            </div>
+        `;
+    }
+
+    // 交易查询页面
+    renderTransactionQuery() {
+        return `
+            <div class="card">
+                <div class="section-title">交易明细</div>
+                <div class="list">
+                    ${this.renderListItem('🛒', '消费 - ¥128.00', 'transaction-detail')}
+                    ${this.renderListItem('💰', '转入 - ¥5,000.00', 'transaction-detail')}
+                    ${this.renderListItem('💸', '转出 - ¥1,000.00', 'transaction-detail')}
+                </div>
+            </div>
+        `;
+    }
+
+    // 个人中心页面
+    renderProfile() {
+        return `
+            <div class="card">
+                <div style="display: flex; align-items: center; padding: 16px;">
+                    <div style="width: 60px; height: 60px; background: #007AFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">👤</div>
+                    <div style="margin-left: 16px;">
+                        <div style="font-size: 18px; font-weight: 600;">用户昵称</div>
+                        <div style="color: #999; margin-top: 4px;">138****8888</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="list">
+                    ${this.renderListItem('⚙️', '账户设置', 'settings')}
+                    ${this.renderListItem('🔐', '安全中心', 'security')}
+                    ${this.renderListItem('❓', '帮助中心', 'help')}
+                </div>
+            </div>
+        `;
+    }
+
+    // 商品列表页面
+    renderProductList() {
+        return `
+            <div class="card">
+                <div class="section-title">商品分类</div>
+                <div class="list">
+                    ${this.renderListItem('👕', '服装专区', 'clothing-detail')}
+                    ${this.renderListItem('👟', '鞋靴专区', 'shoes-detail')}
+                    ${this.renderListItem('💄', '美妆专区', 'beauty-detail')}
+                </div>
+            </div>
+        `;
+    }
+
+    // 购物车页面
+    renderCart() {
+        return `
+            <div class="card">
+                <div class="section-title">我的购物车</div>
+                <div class="list">
+                    ${this.renderListItem('📦', '商品A - ¥99.00', 'product-detail')}
+                    ${this.renderListItem('📦', '商品B - ¥199.00', 'product-detail')}
+                </div>
+                <div style="padding: 16px; text-align: right;">
+                    <span>合计: </span>
+                    <span style="font-size: 20px; color: #FF3B30; font-weight: 600;">¥298.00</span>
+                </div>
+                <button onclick="app.showToast('结算功能开发中')" style="width: calc(100% - 32px); margin: 0 16px 16px; padding: 12px; background: #FF9500; color: white; border: none; border-radius: 8px;">去结算</button>
+            </div>
+        `;
+    }
+
+    // 投资理财页面
+    renderInvest() {
+        return `
+            <div class="card">
+                <div class="section-title">理财产品</div>
+                <div class="list">
+                    ${this.renderListItem('📈', '稳健理财 - 年化3.5%', 'product-detail')}
+                    ${this.renderListItem('💰', '基金定投 - 年化5.2%', 'product-detail')}
+                    ${this.renderListItem('💎', '尊享理财 - 年化4.8%', 'product-detail')}
+                </div>
+            </div>
+        `;
+    }
+
+    // 转账页面
+    renderTransfer() {
+        return `
+            <div class="card">
+                <div class="section-title">转账汇款</div>
+                <div style="padding: 16px;">
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; margin-bottom: 8px; color: #666;">收款账号</label>
+                        <input type="text" placeholder="请输入收款账号" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; margin-bottom: 8px; color: #666;">转账金额</label>
+                        <input type="number" placeholder="请输入金额" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <button onclick="app.showToast('转账成功')" style="width: 100%; padding: 12px; background: #34C759; color: white; border: none; border-radius: 8px; font-size: 16px;">确认转账</button>
+                </div>
+            </div>
+        `;
+    }
+
+    // Toast 提示
+    showToast(message) {
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 9999;
+        `;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 2000);
+    }
 }
 
 // 初始化应用

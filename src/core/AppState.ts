@@ -1,11 +1,22 @@
-import type { AppGlobalState } from './AppState'
+// AppGlobalState 类型定义
+export interface AppGlobalState {
+  user?: {
+    id: string
+    name: string
+    avatar?: string
+  }
+  theme: 'light' | 'dark'
+  language: 'zh-CN' | 'en-US'
+  tabBarSelectedIndex: number
+}
 
 export class AppState {
   private static instance: AppState
-  private app: any
-  private currentPageId: string
-  private pageStack: any[]
+  private app: unknown = null
+  private currentPageId: string = ''
+  private pageStack: unknown[] = []
   private globalState: AppGlobalState
+  private requestResults: Map<string, unknown>
 
   private constructor() {
     this.globalState = {
@@ -13,6 +24,7 @@ export class AppState {
       language: 'zh-CN',
       tabBarSelectedIndex: 0
     }
+    this.requestResults = new Map()
   }
 
   static getInstance(): AppState {
@@ -50,14 +62,42 @@ export class AppState {
     return { ...this.globalState }
   }
 
-  updateGlobalState(updates: Partial<AppGlobalState>): void {
-    this.globalState = { ...this.globalState, ...updates }
+  updateGlobalState(updates: Partial<AppGlobalState> | Record<string, unknown>): void {
+    this.globalState = { ...this.globalState, ...updates } as AppGlobalState
+  }
+
+  // 设置请求结果
+  setRequestResult(url: string, result: unknown): void {
+    this.requestResults.set(url, result)
+  }
+
+  // 获取请求结果
+  getRequestResult(url: string): unknown | undefined {
+    return this.requestResults.get(url)
+  }
+
+  // 清除请求结果
+  clearRequestResults(): void {
+    this.requestResults.clear()
   }
 
   init(app: any): void {
     this.app = app
     this.pageStack = []
     this.currentPageId = app.router.initialPageId
+  }
+
+  // 重置状态
+  reset(): void {
+    this.app = null
+    this.pageStack = []
+    this.currentPageId = ''
+    this.globalState = {
+      theme: 'light',
+      language: 'zh-CN',
+      tabBarSelectedIndex: 0
+    }
+    this.requestResults.clear()
   }
 }
 
@@ -70,4 +110,5 @@ export interface AppGlobalState {
   theme: 'light' | 'dark'
   language: 'zh-CN' | 'en-US'
   tabBarSelectedIndex: number
+  [key: string]: unknown
 }
